@@ -20,11 +20,11 @@ cnx = mysql.connector.connect(
             port=app.config["MYSQL_PORT"],
             user=app.config["DATABASE_USER"],
             password=app.config["DATABASE_PWD"],
-            database=app.config["DATABASE_USER"]
+            database=app.config["DATABASE"]
         )
 
-@app.route("/")
-def test():
+@app.route("/getprojects")
+def getprojects():
     cur = cnx.cursor(dictionary=True)
     try:
         query=("SELECT * from heanlab.project ;")
@@ -34,3 +34,16 @@ def test():
         cur.close()
 
     return []
+
+
+@app.route('/getabout')
+def getabout():
+    cur = cnx.cursor(dictionary = True)
+    try :
+        query =  f"SELECT * FROM {app.config['DATABASE']}.about;"
+        cur.execute(query)
+        return jsonify(cur.fetchone())
+    finally:
+        cur.close()
+
+    pass
