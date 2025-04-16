@@ -7,7 +7,7 @@ class Config:
     MYSQL_HOST = os.getenv('MYSQL_HOST')
     DATABASE = os.getenv('DATABASE')
     DATABASE_PWD = os.getenv('DATABASE_PSSWD')
-    MYSQL_PORT=os.getenv('MYSQL_PORT')
+    MYSQL_PORT=os.getenv('MYSQL_PORT', 3306)
     DATABASE_USER= os.getenv('MYSQL_USER')
 
 

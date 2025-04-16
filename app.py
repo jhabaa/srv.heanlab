@@ -55,3 +55,32 @@ def getabout():
         return jsonify(cur.fetchone())
     finally:
         cur.close()
+
+@app.route('/getproto')
+def getproto():
+    if cnx.is_connected():
+        cur = cnx.cursor(dictionary = True, buffered = True)
+    else:
+        cnx.reconnect()
+        cur = cnx.cursor(dictionary = True, buffered = True)
+    try :
+        query =  f"SELECT * FROM {app.config['DATABASE']}.prototypes;"
+        cur.execute(query)
+        return jsonify(cur.fetchall())
+    finally:
+        cur.close()
+
+@app.route('/gettechnologies')
+def gettechnologies():
+    if cnx.is_connected():
+        cur = cnx.cursor(dictionary = True, buffered = True)
+    else:
+        cnx.reconnect()
+        cur = cnx.cursor(dictionary = True, buffered = True)
+    try :
+        query =  f"SELECT * FROM {app.config['DATABASE']}.technologies;"
+        cur.execute(query)
+        return jsonify(cur.fetchall())
+    finally:
+        cur.close()
+        
